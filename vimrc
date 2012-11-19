@@ -8,11 +8,13 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 """"""" plugins
-Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'kien/ctrlp.vim'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'vim-scripts/The-NERD-Commenter'
 Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-surround'
 """"""" syntax
@@ -39,10 +41,13 @@ nmap <silent> <c-n> :NERDTreeToggle<cr>
 nnoremap <silent> <c-t> :NERDTree .<cr>
 let NERDTreeStatusline="%{getcwd()}"
 
+let g:Powerline_symbols='fancy'
+
 " handle goofy filetypes
 if has("autocmd")
   au BufNewFile,BufRead *.iced set filetype=coffee
   au BufNewFile,BufRead *.pde set filetype=java
+  au BufNewFile,BufRead *.jake set filetype=javascript
   au BufNewFile,BufRead Guardfile set filetype=ruby
   au BufNewFile,BufRead Gemfile set filetype=ruby
   autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8 background=dark
@@ -60,12 +65,13 @@ set ai
 set autoindent
 set backspace=indent,eol,start
 set cursorline
+set cursorcolumn
 set expandtab
 set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set number
+set mouse=a
 set numberwidth=5
 set shiftwidth=2
 set showmatch
@@ -75,6 +81,18 @@ set so=7
 set softtabstop=2
 set tabstop=2
 set visualbell
+
+" Show line numbers
+set relativenumber
+set numberwidth=5
+nnoremap <leader>- :call ToggleRelativeLineNumber()<cr>
+function! ToggleRelativeLineNumber()
+  if( &relativenumber == 1  )
+    set number
+  else
+    set relativenumber
+  endif
+endfunction
 
 " Expand history
 set history=1000
@@ -129,6 +147,15 @@ inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
+
+" ctrl p
+let g:ctrlp_map = '<leader>t'
+nnoremap <leader>y :CtrlPMRU<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+let g:ctrlp_custom_ignore = {
+ \ 'dir':  '\.git$\|\.hg$\|\.svn$|node_modules$',
+ \ 'file': '\.app$\|\.so$\|\.pyc$\$'
+ \ }
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm

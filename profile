@@ -25,6 +25,9 @@ export PATH=$PATH:~/Software/Java/play-2.0.3
 # npm/node
 export PATH=/usr/local/share/npm/bin:$PATH
 
+# PostgreSQL
+export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+
 # coreutils
 # All commands have been installed with the prefix 'g'.
 # If you really need to use these commands with their normal names, you
