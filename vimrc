@@ -18,6 +18,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-surround'
 """"""" syntax
+Bundle 'vim-scripts/VimClojure'
 Bundle 'vim-scripts/vim-coffee-script'
 Bundle 'tpope/vim-cucumber'
 Bundle 'vim-scripts/jade.vim'

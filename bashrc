@@ -36,8 +36,4 @@ HII="\[\033[0;31m\]" #change this for letter colors
 SI="\[\033[0;33m\]" #this is for the current directory
 IN="\[\033[0m\]"
 
-# make bash prompt useful
-if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
-. `brew --prefix`/etc/bash_completion.d/git-completion.bash
-fi
 export PS1="$NM[ $HI\u $SI\w$HII\$(__git_ps1) $NM] $IN"
