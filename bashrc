@@ -21,8 +21,9 @@ alias j="java"
 alias jc="javac"
 
 # because tmux is a fucker
-alias tlist="tmux list-sessions"
-alias tkill="tmux kill-session"
+alias tl="tmux list-sessions"
+alias tk="tmux kill-session"
+alias tkp="tmux kill-pane"
 alias ta="tmux attach -t"
 
 # Load RVM into a shell session *as a function*
