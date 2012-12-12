@@ -17,6 +17,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/jslint.vim'
 """"""" syntax
 Bundle 'vim-scripts/VimClojure'
 Bundle 'vim-scripts/vim-coffee-script'
@@ -42,6 +43,7 @@ nnoremap <silent> <c-t> :NERDTree .<cr>
 let NERDTreeStatusline="%{getcwd()}"
 
 let g:Powerline_symbols='fancy'
+let $JS_CMD="node"
 
 " handle goofy filetypes
 if has("autocmd")
