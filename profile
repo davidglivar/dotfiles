@@ -8,7 +8,8 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
 # Android SDK
-export PATH=${PATH}:~/android-sdk-macosx/tools
+#export PATH=${PATH}:~/android-sdk-macosx/tools
+export PATH=${PATH}:~/Sites/adt-bundle-mac/sdk/tools
 
 # MySQL
 export PATH=$PATH:/usr/local/mysql/bin
