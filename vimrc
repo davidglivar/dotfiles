@@ -17,7 +17,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/jslint.vim'
 """"""" syntax
 Bundle 'vim-scripts/VimClojure'
 Bundle 'vim-scripts/vim-coffee-script'
@@ -28,8 +27,7 @@ Bundle 'vim-scripts/JSON.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'vim-scripts/php.vim-for-php5'
 Bundle 'tpope/vim-haml'
-""""""" colors
-Bundle 'endel/vim-github-colorscheme'
+Bundle 'vim-scripts/vim-stylus'
 
 filetype plugin indent on
 syntax on
@@ -52,7 +50,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.jake set filetype=javascript
   au BufNewFile,BufRead Guardfile set filetype=ruby
   au BufNewFile,BufRead Gemfile set filetype=ruby
-  autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8 background=dark
+  autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8 " background=dark
   autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
 endif
 
@@ -161,6 +159,15 @@ let g:ctrlp_custom_ignore = {
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " Remap the tab key to do autocompletion or indentation depending on the
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)

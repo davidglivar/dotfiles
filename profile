@@ -13,12 +13,18 @@ export PATH=${PATH}:~/Sites/adt-bundle-mac/sdk/tools
 
 # MySQL
 export PATH=$PATH:/usr/local/mysql/bin
-#export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
+
+# App Engine
+#export PATH=/usr/local/google_appengine:$PATH
 
 # Go
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/Software/Go
-export PATH=$PATH:$HOME/Software/Go/bin
+export GOPATH=$HOME/Sites/gocode
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+#export GOPATH=$HOME/Software/Go
+#export PATH=$PATH:$HOME/Software/Go/bin
 
 # Java/Play
 export PATH=$PATH:~/Software/Java/play-2.0.3
