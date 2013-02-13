@@ -1,63 +1,49 @@
 set nocompatible
 
-filetype off
-
 " ~~~ VUNDLE ~~~
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle "gmarik/vundle"
 """"""" plugins
-Bundle 'kien/ctrlp.vim'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'vim-scripts/The-NERD-Commenter'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'msanders/snipmate.vim'
-Bundle 'tpope/vim-surround'
+Bundle "kien/ctrlp.vim"
+Bundle "jiangmiao/auto-pairs"
+Bundle "vim-scripts/The-NERD-Commenter"
+Bundle "tpope/vim-endwise"
+Bundle "tpope/vim-fugitive"
+Bundle "scrooloose/nerdtree"
+Bundle "Lokaltog/vim-powerline"
+Bundle "msanders/snipmate.vim"
+Bundle "tpope/vim-surround"
 """"""" syntax
-Bundle 'vim-scripts/VimClojure'
-Bundle 'vim-scripts/vim-coffee-script'
-Bundle 'tpope/vim-cucumber'
-Bundle 'vim-scripts/jade.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'vim-scripts/JSON.vim'
-Bundle 'groenewege/vim-less'
-Bundle 'vim-scripts/php.vim-for-php5'
-Bundle 'tpope/vim-haml'
-Bundle 'vim-scripts/vim-stylus'
+Bundle "vim-scripts/VimClojure"
+Bundle "vim-scripts/vim-coffee-script"
+Bundle "tpope/vim-cucumber"
+Bundle "vim-scripts/jade.vim"
+Bundle "pangloss/vim-javascript"
+Bundle "vim-scripts/JSON.vim"
+Bundle "groenewege/vim-less"
+Bundle "vim-scripts/php.vim-for-php5"
+Bundle "tpope/vim-haml"
+Bundle "vim-scripts/vim-stylus"
 
 filetype plugin indent on
 syntax on
 
 " LEADER
-let mapleader=','
+let mapleader=","
 
 " NERDTree
 nmap <silent> <c-n> :NERDTreeToggle<cr>
 nnoremap <silent> <c-t> :NERDTree .<cr>
 let NERDTreeStatusline="%{getcwd()}"
 
-let g:Powerline_symbols='fancy'
+let g:Powerline_symbols="fancy"
 let $JS_CMD="node"
-
-" handle goofy filetypes
-if has("autocmd")
-  au BufNewFile,BufRead *.iced set filetype=coffee
-  au BufNewFile,BufRead *.pde set filetype=java
-  au BufNewFile,BufRead *.jake set filetype=javascript
-  au BufNewFile,BufRead Guardfile set filetype=ruby
-  au BufNewFile,BufRead Gemfile set filetype=ruby
-  autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8 " background=dark
-  autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
-endif
 
 " set the color scheme
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
-set background=light
 set gfn=Menlo:h12
 
 " general settings
@@ -149,16 +135,13 @@ inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 
 " ctrl p
-let g:ctrlp_map = '<leader>t'
+let g:ctrlp_map = "<leader>t"
 nnoremap <leader>y :CtrlPMRU<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = {
- \ 'dir':  '\.git$\|\.hg$\|\.svn$|node_modules$',
- \ 'file': '\.app$\|\.so$\|\.pyc$\$'
+ \ "dir":  "\.git$\|\.hg$\|\.svn$|node_modules$",
+ \ "file": "\.app$\|\.so$\|\.pyc$\$"
  \ }
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
@@ -166,23 +149,5 @@ function! <SID>SynStack()
   if !exists("*synstack")
     return
   endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+  echo map(synstack(line("."), col(".")), 'synIDattr(v:val, "name")')
 endfunc
-
-" Remap the tab key to do autocompletion or indentation depending on the
-" context (from http://www.vim.org/tips/tip.php?tip_id=102)
-function! InsertTabWrapper()
-  let inserted = TriggerSnippet()
-  if inserted == "\<tab>"
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-      return "\<tab>"
-    else
-      return "\<c-p>"
-    endif
-  else
-    return inserted
-  endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
