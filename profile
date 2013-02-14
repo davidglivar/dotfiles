@@ -12,8 +12,8 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=${PATH}:~/Sites/adt-bundle-mac/sdk/tools
 
 # MySQL
-export PATH=$PATH:/usr/local/mysql/bin
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
+#export PATH=$PATH:/usr/local/mysql/bin
+#export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
 
 # App Engine
 #export PATH=/usr/local/google_appengine:$PATH
@@ -41,13 +41,8 @@ export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 # can add a "gnubin" directory to your PATH from your bashrc like:
 # PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
+if [ -f `brew --prefix`/etc/bash_completion  ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
-# RVM
-[[ -s '/Users/davidglivar/.rvm/scripts/rvm' ]] && source '/Users/davidglivar/.rvm/scripts/rvm'
-
-# recommended by brew doctor
-#export PATH='/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin'
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
