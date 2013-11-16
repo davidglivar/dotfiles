@@ -17,6 +17,7 @@ Bundle "msanders/snipmate.vim"
 Bundle "tpope/vim-surround"
 """"""" syntax
 Bundle "vim-scripts/VimClojure"
+Bundle "msanders/cocoa.vim"
 Bundle "vim-scripts/vim-coffee-script"
 Bundle "tpope/vim-cucumber"
 Bundle "vim-scripts/jade.vim"
@@ -50,6 +51,7 @@ set gfn=Menlo:h12
 set ai
 set autoindent
 set backspace=indent,eol,start
+set colorcolumn=80
 set cursorline
 set cursorcolumn
 set expandtab
@@ -67,6 +69,9 @@ set so=7
 set softtabstop=2
 set tabstop=2
 set visualbell
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 " Show line numbers
 set relativenumber

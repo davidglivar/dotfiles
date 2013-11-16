@@ -8,8 +8,8 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
 # Android SDK
-#export PATH=${PATH}:~/android-sdk-macosx/tools
-export PATH=${PATH}:~/Sites/adt-bundle-mac/sdk/tools
+export PATH=$PATH:$HOME/Sites/adt-bundle-mac/sdk/tools
+export PATH=$PATH:$HOME/Sites/adt-bundle-mac/sdk/platform-tools
 
 # MySQL
 #export PATH=$PATH:/usr/local/mysql/bin
@@ -20,9 +20,10 @@ export PATH=${PATH}:~/Sites/adt-bundle-mac/sdk/tools
 
 # Go
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/Sites/gocode
+export GOPATH=$HOME/Sites/gospace
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
+
 #export GOPATH=$HOME/Software/Go
 #export PATH=$PATH:$HOME/Software/Go/bin
 
@@ -32,8 +33,13 @@ export PATH=$PATH:~/Software/Java/play-2.0.3
 # npm/node
 export PATH=/usr/local/share/npm/bin:$PATH
 
+# Global-local npm packages
+export PATH=$PATH:$HOME/Sites/lib/voyager/bin
+export PATH=$PATH:$HOME/Sites/lib/oak/bin
+export PATH=$PATH:$HOME/Sites/prototypes/kao/bin
+
 # PostgreSQL
-export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+export PATH=$PATH:/Applications/Postgres.app/Contents/MacOS/bin
 
 # coreutils
 # All commands have been installed with the prefix 'g'.
