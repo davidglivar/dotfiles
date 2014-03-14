@@ -13,23 +13,33 @@ Bundle "tpope/vim-endwise"
 Bundle "tpope/vim-fugitive"
 Bundle "scrooloose/nerdtree"
 Bundle "Lokaltog/vim-powerline"
-Bundle "msanders/snipmate.vim"
+Bundle "garbas/vim-snipmate"
+Bundle "marcweber/vim-addon-mw-utils"
 Bundle "tpope/vim-surround"
+Bundle "Blackrush/vim-gocode"
+Bundle "vim-scripts/JavaScript-Indent"
+Bundle "Rip-Rip/clang_complete"
 """"""" syntax
 Bundle "vim-scripts/VimClojure"
 Bundle "msanders/cocoa.vim"
 Bundle "vim-scripts/vim-coffee-script"
 Bundle "tpope/vim-cucumber"
 Bundle "vim-scripts/jade.vim"
-Bundle "pangloss/vim-javascript"
+Bundle "jelera/vim-javascript-syntax"
 Bundle "vim-scripts/JSON.vim"
 Bundle "groenewege/vim-less"
 Bundle "vim-scripts/php.vim-for-php5"
 Bundle "tpope/vim-haml"
 Bundle "vim-scripts/vim-stylus"
 
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
+
 syntax on
+set t_Co=256
+colorscheme hybrid
 
 " LEADER
 let mapleader=","
@@ -42,11 +52,6 @@ let NERDTreeStatusline="%{getcwd()}"
 let g:Powerline_symbols="fancy"
 let $JS_CMD="node"
 
-" set the color scheme
-set t_Co=256
-colorscheme Tomorrow-Night-Eighties
-set gfn=Menlo:h12
-
 " general settings
 set ai
 set autoindent
@@ -55,6 +60,7 @@ set colorcolumn=80
 set cursorline
 set cursorcolumn
 set expandtab
+set grepprg=ack " faster search
 set hlsearch
 set ignorecase
 set incsearch
@@ -70,8 +76,21 @@ set softtabstop=2
 set tabstop=2
 set visualbell
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+hi CursorColumn ctermbg=black ctermfg=white
+hi Overlength ctermbg=black ctermfg=white
 match OverLength /\%81v.\+/
+
+" Put useful info in status line
+set statusline=\ %<%f\ (%{&ft})%=#%n\ %l/%L,%c%V\ 
+hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " Show line numbers
 set relativenumber
@@ -95,14 +114,15 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " HTML glitch
 let html_no_rendering=1
 
-" Put useful info in status line
-set statusline=\ %<%f\ (%{&ft})%=#%n\ %l/%L,%c%V\ 
-hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
-
 " ~~~ MAPPINGS ~~~
 noremap <C-c> <Esc>
 map <Leader>w :w<cr>
-map ,so :so ~/.vimrc<cr>
+map <Leader>so :so ~/.vimrc<cr>
+
+" toggle paste mode
+noremap = :set invpaste paste?<cr>
+set pastetoggle=<F2>
+set showmode
 
 " Select and Copy a line
 nnoremap Y Vy

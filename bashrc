@@ -1,36 +1,78 @@
-# color me tickled
-# export TERM="xterm-color"
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-export GREP_OPTIONS="--color"
-export CLICOLOR=TRUE;
+# if not running interactively, don't do anything
+case $- in
+  *i*) ;;
+    *) return ;;
+esac
 
-# aliases are for chumps
-alias ls="ls -l"
-alias ll="ls -la"
-alias mysql="/usr/local/mysql/bin/mysql"
+# don't put duplicate lines or lines starting with space in the history.
+# see bash(1) for more options
+HISTCONTROL=ignoreboth
 
-# because im lazy
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary, update the
+# values of LINES and COLUMNS
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will match all
+# files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -l --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+else
+    export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+    export GREP_OPTIONS="--color"
+    export CLICOLOR=TRUE;
+    alias ls="ls -l"
+    alias ll="ls -la"
+fi
+
+# lazy
 alias cd..="cd .."
 alias ..="cd .."
 
-alias gpp="g++"
-alias gob="go clean && go build main.go && ./main"
-
-# rvm use .ruby-version
-alias rv="rvm use .ruby-version"
-
-# java
-alias j="java"
-alias jc="javac"
-
-# because tmux is a fucker
+# tmux
+alias tmux="TERM=xterm-256color tmux"
 alias tl="tmux list-sessions"
-alias tk="tmux kill-session"
-alias tkp="tmux kill-pane"
 alias ta="tmux attach -t"
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f `brew --prefix`/etc/bash_completion  ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
 
 # Terminal colors (after installing GNU coreutils)
 NM="\[\033[0;38m\]" #means no background and white lines
@@ -39,13 +81,11 @@ HII="\[\033[0;31m\]" #change this for letter colors
 SI="\[\033[1;30m\]" #this is for the current directory
 IN="\[\033[0m\]"
 
-#export PS1="$NM[ $HI\u $SI\w$HII\$(__git_ps1) $NM] $IN"
-export PS1="$NM[ $SI\w$HII\$(__git_ps1) $NM] $IN"
+# terminal prefix
+export PS1="$NM[ $HI\w$HII\$(__git_ps1) $NM] $IN"
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 # added by travis gem
 source /Users/davidglivar/.travis/travis.sh

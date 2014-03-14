@@ -1,34 +1,30 @@
-source ~/.bashrc
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+  # include .bashrc if it exists
+  if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+  fi
+fi
 
-# recommended by brew doctor
-export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin'
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
+fi
 
 # prepend local bin
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
-# Android SDK
-export PATH=$PATH:$HOME/Sites/adt-bundle-mac/sdk/tools
-export PATH=$PATH:$HOME/Sites/adt-bundle-mac/sdk/platform-tools
-
-# MySQL
-#export PATH=$PATH:/usr/local/mysql/bin
-#export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
-
-# App Engine
-#export PATH=/usr/local/google_appengine:$PATH
+# SDKs
+export PATH=$HOME/dev/SDK/adt-bundle-mac/sdk/tools:$PATH
+export PATH=$HOME/dev/SDK/adt-bundle-mac/sdk/platform-tools:$PATH
+export PATH=$HOME/dev/SDK/go_appengine:$PATH
 
 # Go
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/Sites/gospace
 export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$GOPATH/bin
-
-#export GOPATH=$HOME/Software/Go
-#export PATH=$PATH:$HOME/Software/Go/bin
-
-# Java/Play
-export PATH=$PATH:~/Software/Java/play-2.0.3
+export GOPATH=$HOME/Sites/go
+export PATH=$PATH:$GOPATH
 
 # npm/node
 export PATH=/usr/local/share/npm/bin:$PATH
@@ -41,14 +37,8 @@ export PATH=$PATH:$HOME/Sites/prototypes/kao/bin
 # PostgreSQL
 export PATH=$PATH:/Applications/Postgres.app/Contents/MacOS/bin
 
-# coreutils
-# All commands have been installed with the prefix 'g'.
-# If you really need to use these commands with their normal names, you
-# can add a "gnubin" directory to your PATH from your bashrc like:
-# PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+# Add rvm to PATH for scripting
+export PATH=$PATH:$HOME/.rvm/bin
 
-if [ -f `brew --prefix`/etc/bash_completion  ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Heroku toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
