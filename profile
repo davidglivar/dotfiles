@@ -23,8 +23,9 @@ export PATH=$HOME/dev/SDK/go_appengine:$PATH
 # Go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
-export GOPATH=$HOME/Sites/go
+export GOPATH=$HOME/dev/go
 export PATH=$PATH:$GOPATH
+export PATH=$PATH:$GOPATH/bin
 
 # npm/node
 export PATH=/usr/local/share/npm/bin:$PATH
